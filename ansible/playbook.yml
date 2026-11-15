@@ -1,0 +1,6 @@
+---
+- name: Deploy todo-api
+  hosts: local
+  become: true
+  roles:
+    - todoapp

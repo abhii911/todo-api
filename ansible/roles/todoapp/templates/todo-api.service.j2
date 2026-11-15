@@ -1,0 +1,10 @@
+[Unit]
+Description=Todo API
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/java -jar /opt/todo-api/todo-api.jar --server.port={{ app_port }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
