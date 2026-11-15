@@ -8,19 +8,21 @@ pipeline {
             steps {
                 bat '.\\mvnw.cmd test'
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
         stage('Build') {
             steps {
                 bat '.\\mvnw.cmd clean package -DskipTests'
             }
-        }
-    }
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
-        }
-        success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            post {
+                success {
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
         }
     }
 }
